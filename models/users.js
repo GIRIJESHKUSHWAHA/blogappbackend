@@ -1,7 +1,8 @@
 const config = require('config');
 const jwt = require('jsonwebtoken');
 const mongoose = require('mongoose');
-
+require('dotenv').config();
+const jwtPrivateKey = process.env.jwtPrivateKey;
 const userSchema = new mongoose.Schema({
   name: {
     type: String,
@@ -32,7 +33,7 @@ const userSchema = new mongoose.Schema({
 
 
 userSchema.methods.generateAuthToken = function() { 
-  const token = jwt.sign({ _id: this._id, role: this.role }, 'jwtPrivateKey', {
+  const token = jwt.sign({ _id: this._id, role: this.role }, jwtPrivateKey, {
     algorithm: "HS256",
     expiresIn: 60*60,
   });

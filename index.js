@@ -7,7 +7,7 @@ const app = express();
 app.use(express.static('public'));
 const cors = require('cors');
 app.use(cors());
-require('./startups/db')();
+require('./connection/connection')();
 
 app.use(express.json());
 
